@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+    <link rel="stylesheet" href="/css/home/home.css"/>
+    <title>账号安全</title>
+    <title th:text="${userInformation.id}+'信息修改'"></title>
+    <link href="/css/setting/AccountSettings.css" rel="stylesheet"/>
+    <link href="/css/all.css" rel="stylesheet"/>
+    <link href="/image/title.ico" rel="icon"/>
+    <script src="/js/jquery-3.0.0.js"></script>
+</head>
+<script src="/js/all.js"></script>
+<body>
+<header th:include="header::copy"></header>
+<div class="all_content">
+    <main>
+        <div class="all_main">
+            <div class="set">
+                账号设置
+            </div>
+            <a href="/accountSettings" style="text-decoration: none;color: black">
+                <div class="information ">
+                    我的信息
+                </div>
+            </a>
+            <div class="picture currentSet">
+                头像
+            </div>
+            </a>
+            <div class="bottom-line"></div>
+            <a href="/security" style="text-decoration: none;color: black">
+                <div class="security">
+                    账号安全
+                </div>
+            </a>
+            <div class="">
+                &nbsp;
+            </div>
+            <div class="">
+                &nbsp;
+            </div>
+            <div class="">
+                &nbsp;
+            </div>
+        </div>
+        <div class="main"  style="display: block;">
+            <form action="modifyAvatar" method="post" enctype="multipart/form-data">
+                <br/><br/>  <br/><br/>  <br/><br/>
+                <div class="all_stats" th:with="uid=${userInformation.id}">
+                <img src="" class="friends_image_header" th:src="${userInformation.getAvatar()}" alt="??"/>
+                </div>>
+                    <br/><br/>
+                    <p>选择头像:<input type="file" name="fileName"/></p>
+<!--
+
+                <img src="/show?fileName=${fileName}" style="width: 100px"/>
+                <a class="movie_image_upload">
+                    <input type="file" value="图片" class="" id="file_upload" name="file_upload"/>图片</a>
+-->
+
+                <p><input type="submit" value="提交"/></p>
+            </form>
+<!--            <span>"${msg}"</span>-->
+</div>
+</main>
+<aside th:include="aside::aside"></aside>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+//{
+//  "properties": [
+//    {
+//      "name": "main",
+//      "type": "java.lang.String",
+//      "description": "Description for main."
+//    },
+//    {
+//      "name": "absoluteImgPath",
+//      "type": "java.lang.String",
+//      "description": "Description for absoluteImgPath."
+//    }
+//  ] }

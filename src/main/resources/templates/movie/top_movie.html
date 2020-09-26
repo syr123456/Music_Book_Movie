@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Top榜单</title>
+    <link href="/image/title.ico" rel="icon"/>
+    <link href="/css/all.css" rel="stylesheet"/>
+    <link href="/css/movie/searchMovieResult.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.0.0.js"></script>
+    <link href="/css/all.css" rel="stylesheet"/>
+    <link href="/css/movie/searchMovieResult.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.0.0.js"></script>
+    <script src="/js/layer.js"></script>
+    <script src="/js/home/home.js"></script>
+</head>
+
+<body>
+<header th:include="header :: copy"></header>
+<div class="all_content">
+    <aside th:include="aside :: aside"></aside>
+    <main>
+        <div th:with="m=${movie}">
+            <h2 class="h4 mb-3 font-weight-normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;榜单规则:按照各类TOP榜单排列，点击进入详情界面</h2>
+            <div class="">
+                &nbsp;
+            </div>
+            <div class="search_movie_result" th:each="o:${movie}">
+                <h3 class="search_movie_result_information_name_2">
+                    <a th:href="'/top/movie/result/'+${o.getId()}" th:text="${o.getTitle()}">来自WSK的爱</a>
+                </h3>
+                <div class="top_movie_result_img">
+                    <a th:href="'/top/movie/result/'+${o.getId()}">
+                        <img src="/static/image/1.jpg" th:src="${o.getImage()}" width="630" height="280" th:alt="${o.getTitle()}"/>
+                    </a>
+                </div>
+<!--                width="630" height="200"-->
+                <span class="search_movie_result_information_name_1" th:text="${o.getDetail()}"></span>
+                <div class="">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </main>
+    <div style="clear: both"></div>
+</div>
+<footer>
+    <div>
+        <button class="go_to_top" value=""></button>
+    </div>
+</footer>
+</body>
+<script src="/js/all.js"></script>
+</html>

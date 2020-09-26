@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title} + '-搜索结果'">搜索书籍</title>
+    <link href="/css/movieInformation.css" rel="stylesheet"/>
+    <link href="/image/title.ico" rel="icon"/>
+    <link href="/css/all.css" rel="stylesheet"/>
+    <link href="/css/movie/searchMovieResult.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.0.0.js"></script>
+    <script src="/js/layer.js"></script>
+    <script src="/js/home/home.js"></script>
+</head>
+<style>
+    div.search_movie_result_information_1 {
+        font-weight: 400;
+    }
+</style>
+<body>
+<header th:include="header :: copy"></header>
+<div class="all_content">
+    <main>
+        <div th:with="m=${entity}">
+            <div class="search_movie_result" th:each="o:${entity}">
+                <h1 th:href="'/book/book_information/'+${o.getId()}" th:text="${o.getTitle()}">来自WSK的爱</h1>
+                <div class="search_movie_result_img">
+                    <img src="/image/1.jpg" th:src="${o.getImage()}" class="movie_img" style="width: 200px; max-width: 250px"
+                         th:title="${o.getTitle()}" alt="加载中......"/>
+<!--                    <img src="/image/1.jpg" th:src="${o.getImage()}" th:alt="${o.getTitle()}"/>-->
+                </div>
+                <div class="search_movie_result_information">
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者：</span>
+                        <div th:text="${o.getAuthor()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出&nbsp;&nbsp;版&nbsp;&nbsp;社：</span>
+                        <div th:text="${o.getPublisher()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出版时间：</span>
+                        <div th:text="${o.getPublishtime()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：</span>
+                        <div th:text="${o.getPrice()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;购&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;买：</span>
+                        <div th:text="${o.getWherebuy()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从&nbsp;&nbsp;编&nbsp;&nbsp;项：</span>
+                        <div th:text="${o.getCongbian()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签：</span>
+                        <div th:text="${o.getTag()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;&nbsp;S&nbsp;&nbsp;B&nbsp;&nbsp;N：</span>
+                        <div th:text="${o.getISBN()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;包&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;装：</span>
+                        <div th:text="${o.getBaozhuang()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本：</span>
+                        <div th:text="${o.getKaiben()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数：</span>
+                        <div th:text="${o.getYeshu()}" class="movie_font"></div>
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数：</span>
+                        <div th:text="${o.getZishu()}" class="movie_font"></div>
+                    </div>
+                    <div class="">
+                        &nbsp;
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者简介：</span>
+                        <div class="">
+                        </div>
+                        <div th:text="${o.getAcontent()}" class="movie_font"></div>
+                    </div>
+                    <div class="">
+                        &nbsp;
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内容简介：</span>
+                        <div class="">
+                        </div>
+                        <div th:text="${o.getContent()}" class="movie_font"></div>
+                    </div>
+                    <div class="">
+                        &nbsp;
+                    </div>
+                    <div><span class="movie_show">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录：</span>
+                        <div class="">
+                        </div>
+                        <div th:text="${o.getLog()}" class="movie_font"></div>
+                    </div>
+                </div>
+                <div class="all_release">
+                    <!--发表内容-->
+                    <form action="/publishCritic" method="post" enctype="multipart/form-data" class="release_form">
+                        <div class="release_div">
+                            <textarea class="release_message" name="movie_content" placeholder="发表评论"></textarea>
+                        </div>
+                        <div class="release_div_2">
+                            <span class="size_tip">还可以输入122个字</span>
+                            <span class="movie_name">书名：</span>
+                            <input type="text" class="movie_name_text" name="movie_name" th:value="${o.getTitle()}"/>
+                            <a class="movie_image_upload"><input type="file" value="图片" class="" id="file_upload"
+                                                                 name="file_upload"/>图片</a>
+                            <select class="movie_state" name="isPrivate">
+                                <option value="0">公共圈</option>
+                                <option value="1">好友圈</option>
+                            </select>
+                            <input type="button" th:value="发布" class="movie_release"/>
+                            <!--<button value="发布" class="movie_release">发布</button>-->
+                        </div>
+                    </form>
+                    <div class="image_container">
+                        <div style="" class="close_img_tip">
+                            ×
+                        </div>
+                        <img id="preview" width="80%" height="" style="position: relative;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <aside th:include="aside :: aside"></aside>
+    <div style="clear: both"></div>
+</div>
+<footer>
+    <div>
+        <button class="go_to_top" value=""></button>
+    </div>
+</footer>
+</body>
+<script src="/js/all.js"></script>
+</html>

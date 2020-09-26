@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="Movie">详情</title>
+<!--    <title>详情</title>-->
+<!--    "${movie.getTitle()}+-->
+    <link rel="stylesheet" href="/css/movieInformation.css"/>
+    <link rel="stylesheet" href="/css/all.css"/>
+    <link href="/image/title.ico" rel="icon"/>
+    <script src="/js/jquery-3.0.0.js"></script>
+    <script src="/js/layer.js"></script>
+</head>
+<script src="/js/all.js"></script>
+<script src="/js/home/home.js"></script>
+<!--<script src="/js/information/movieInformation.js"></script>-->
+<body><header th:include="header :: copy"></header>
+
+<div class="all_content" style="">
+    <main>
+        <div class="">&nbsp;</div><div class="">&nbsp;</div><div class="">&nbsp;</div>
+        <div style="...">
+            <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="movie_font" th:href="'/search/movie/images/'+${id}" th:text="${length}+剧照">来自WSK的爱</a>
+            <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="movie_font" th:href="'/search/movie/images/posters/'+${id}" th:text="海报">来自WSK的爱</a>
+        </div>
+        <div class="">&nbsp;</div><div class="">&nbsp;</div>
+        <div th:with="s=${image}">
+            <div class="all_movie" th:each="t:${image}">
+                <div class="movie_cover1">
+                    <img th:src="${t}" class="movie_img" th:title="图片" alt="加载中......"/>
+                </div>
+            </div>
+        </div>
+
+        <!--<div th:with="s=${image}">
+            for(var i=0;i<${length};i++}){
+            var img=s[i];
+            <div class="movie_cover1">
+                <img th:src=img class="movie_img" th:title="图片" alt="加载中......"/>
+            </div>
+            }
+        </div>-->
+    </main>
+    <aside th:include="aside :: aside"></aside>
+
+</div>
+<footer>
+    <div>
+        <button class="go_to_top" value=""></button>
+    </div>
+</footer>
+</body>
+</html>

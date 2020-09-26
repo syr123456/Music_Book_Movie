@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${singer.getName()}+'(瓢虫微生活-音乐人)'">详情</title>
+    <link rel="stylesheet" href="/css/movieInformation.css"/>
+    <link rel="stylesheet" href="/css/all.css"/>
+    <link href="/image/title.ico" rel="icon"/>
+    <script src="/js/jquery-3.0.0.js"></script>
+    <script src="/js/layer.js"></script>
+    <link rel="stylesheet" href="/css/APlayer.min.css"/>
+    <script src="/js/APlayer.min.js"></script>
+    <script src="/js/home/home.js"></script>
+</head>
+<script src="/js/all.js"></script>
+<!--<script src="/js/information/movieInformation.js"></script>-->
+<body>
+<header th:include="header :: copy"></header>
+<div class="all_content" style="">
+    <main>
+        <div>
+            <div class="all_movie" th:with="m=${singer}">
+                <h1 th:text="${m.getName()}">WSK</h1>
+                <div class="movie_cover">
+                    <img src="/static/image/1.jpg" th:src="${m.getImg()}" width="630" height="280" th:alt="${m.getName()}"/>
+                </div>
+                <div style="...">
+                    <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a class="movie_font" th:href="'/music/information/singer/'+${m.getId()}" th:text="个人信息">来自WSK的爱</a>
+                    <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a class="movie_font" th:href="'/music/information/singer_album/'+${m.getId()}" th:text="专辑">来自WSK的爱</a>
+                    <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a class="movie_font" th:href="'/music/information/singer_music/'+${m.getId()}" th:text="歌曲">来自WSK的爱</a>
+                    <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a class="movie_font" th:href="'/music/information/singer_mv/'+${m.getId()}" th:text="MV">来自WSK的爱</a>
+                </div>
+<!--                歌手相关歌曲-->
+                <div class="">&nbsp;</div><div class="">&nbsp;</div>
+                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;歌曲：</h3>
+                <div th:with="p=${music}">
+                    <tr th:each="o : ${music}" class="even">
+                        <td class="music_img" th:title="${o.getTitle()}">
+                            <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            <a th:href="'/music/information/' + ${m.getId()}+'/'+ ${o.getId()} ">
+                                <img src="/static/image/1.jpg" th:src="${o.getImg()}" width="40" height="40" th:alt="${o.getTitle()}"/>
+                            </a>
+                        </td>
+                        <td class="hd rank" th:title="${o.getTitle()}">&nbsp;
+                            <a th:href="'/music/information/' + ${m.getId()}+'/'+ ${o.getId()}">
+                                <span class="music_songname" th:text="'歌曲：'+${o.getTitle()}">歌名</span></a>
+                        </td>
+                        <td class="hd music_singername" th:title="${o.getSinger()}">
+                            <a th:href="'/music/information/singer/' + ${o.getUrlsinger()}">
+                            <span class="music_songname" th:text="${'&nbsp;&nbsp;作者：'+o.getSinger()}">歌手</span></a>
+                        </td>
+                        <td class="hd music_albumname" th:title="${o.getAlbum()}">
+                            <a th:href="'/music/information/album/' + ${o.getUrlalbum()}">
+                                <span class="music_songname" th:text="${'&nbsp;&nbsp;专辑：'+o.getAlbum()}">专辑</span></a>
+                        </td>
+                        <div class="">&nbsp;</div>
+                    </tr>
+                </div>
+<!--                发送评论-->
+                <div style="clear: both"></div>
+                <div class="all_release">
+                    <!--发表内容-->
+                    <form action="/publishCritic" method="post" enctype="multipart/form-data" class="release_form">
+                        <div class="release_div">
+                            <textarea class="release_message" name="movie_content" placeholder="发表评论"></textarea>
+                        </div>
+                        <div class="release_div_2">
+                            <span class="size_tip">还可以输入122个字</span>
+                            <span class="movie_name">歌手：</span>
+                            <input type="text" class="movie_name_text" name="movie_name" th:value="${m.getName()}"/>
+                            <a class="movie_image_upload"><input type="file" value="图片" class="" id="file_upload"
+                                                                 name="file_upload"/>图片</a>
+                            <select class="movie_state" name="isPrivate">
+                                <option value="0">公共圈</option>
+                                <option value="1">好友圈</option>
+                            </select>
+                            <input type="button" th:value="发布" class="movie_release"/>
+                            <!--<button value="发布" class="movie_release">发布</button>-->
+                        </div>
+                    </form>
+                    <div class="image_container">
+                        <div style="" class="close_img_tip">
+                            ×
+                        </div>
+                        <img id="preview" width="80%" height="" style="position: relative;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <aside th:include="aside :: aside"></aside>
+    <div style="clear: both"></div>
+</div>
+<footer>
+    <div>
+        <button class="go_to_top" value=""></button>
+    </div>
+</footer>
+</body>
+<script>
+    var songName = $("#songName").text();
+    var songPic = $("#songPic").attr("src");
+    var singer = $("#singer").text();
+    var url = $("#url").text();
+    console.log(songName + songPic + singer);
+    var ap = new APlayer({
+        element: document.getElementById('player1'),
+        narrow: false,
+        autoplay: true,
+        showlrc: false,
+        music: {
+            title: songName,
+            author:singer,
+            url: url,
+            pic: songPic
+        }
+    });
+    ap.init();
+
+</script>
+</html>

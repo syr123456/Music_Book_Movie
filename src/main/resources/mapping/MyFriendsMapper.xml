@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsk.life.dao.MyFriendsMapper" >
+  <resultMap id="BaseResultMap" type="com.wsk.life.domain.MyFriends" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="addTime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
+    <result column="allow" property="allow" jdbcType="SMALLINT" />
+  </resultMap>
+
+  <sql id="table">
+    myfriends
+  </sql>
+
+  <sql id="Base_Column_List" >
+    id, addTime, fid, uid, modified, allow
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getFid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List"/>
+    from <include refid="table" />
+    where uid = #{id,jdbcType=INTEGER} and allow=1
+  </select>
+  <select id="isFriends" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM <include refid="table" />
+    where uid=#{uid} and fid=#{fid} and allow=1
+    limit 1
+  </select>
+  <select id="getFriends" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="table" />
+    where uid=#{uid} and fid=#{fid}
+    limit 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wsk.life.domain.MyFriends" >
+    insert into <include refid="table" /> (id, addTime, fid,
+      uid, modified, allow
+      )
+    values (#{id,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{fid,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{allow,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wsk.life.domain.MyFriends" >
+    insert into <include refid="table" />
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="addtime != null" >
+        addTime,
+      </if>
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="modified != null" >
+        modified,
+      </if>
+      <if test="allow != null" >
+        allow,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null" >
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="allow != null" >
+        #{allow,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.life.domain.MyFriends" >
+    update <include refid="table" />
+    <set >
+      <if test="addtime != null" >
+        addTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null" >
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="allow != null" >
+        allow = #{allow,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wsk.life.domain.MyFriends" >
+    update
+    <include refid="table"/>
+    set addTime = #{addtime,jdbcType=TIMESTAMP},
+      fid = #{fid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      allow = #{allow,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

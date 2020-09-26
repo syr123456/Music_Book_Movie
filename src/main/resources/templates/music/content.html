@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${name}+'热评'">详情</title>
+    <!--    <title>详情</title>-->
+    <!--    "${movie.getTitle()}+-->
+    <link rel="stylesheet" href="/css/movieInformation.css"/>
+    <link rel="stylesheet" href="/css/all.css"/>
+    <link href="/image/title.ico" rel="icon"/>
+    <script src="/js/jquery-3.0.0.js"></script>
+    <script src="/js/layer.js"></script>
+</head>
+<script src="/js/all.js"></script>
+<script src="/js/home/home.js"></script>
+<!--<script src="/js/information/movieInformation.js"></script>-->
+<body><header th:include="header :: copy"></header>
+
+<div class="all_content" style="">
+    <main>
+        <h1 th:text="${name}" id="songName" th:value="${name}">WSK</h1>
+        <div class="">&nbsp;</div><div class="">&nbsp;</div>
+        <div th:with="s=${entity}">
+            <div class="all_movie" th:each="t:${entity}">
+                <div class="movie_cover">
+                    <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <img th:src="${t.getImg()}" width="80" height="80" class="movie_img" alt="加载中......"/>
+                </div>
+                <div style="...">
+                    <div class="">&nbsp;</div>
+                    <span th:text="${t.getTime()}+'   '+${t.getCredit()}" class="hot_comment_1_name">WSK</span>
+                    <div class="hot_comment_1">
+                        <span style="color:#666666;">作者：</span>
+                        <span th:text="${t.getAuthor()}" class="hot_comment_1_name">WSK</span>
+                    </div>
+                </div>
+                <div class="hot_comment_1">
+                    <span style="color:#666666;">标题：</span>
+                    <span th:text="${name}" class="hot_comment_1_name">WSK</span>
+                </div>
+                <div class="hot_comment_1">
+                    <span style="color:#666666;">评论：</span>
+                    <span th:text="${t.getDetail()}" class="hot_comment_1_name">WSK</span>
+                </div>
+                <div class="">&nbsp;</div><div class="">&nbsp;</div>
+            </div>
+        </div>
+    </main>
+    <aside th:include="aside :: aside"></aside>
+</div>
+<footer>
+    <div>
+        <button class="go_to_top" value=""></button>
+    </div>
+</footer>
+</body>
+</html>

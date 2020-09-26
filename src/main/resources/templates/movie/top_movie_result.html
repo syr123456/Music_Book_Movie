@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${top.getTitle()}+'(瓢虫微生活)'">详情</title>
+    <link href="/image/title.ico" rel="icon"/>
+    <link href="/css/all.css" rel="stylesheet"/>
+    <link href="/css/movie/searchMovieResult.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.0.0.js"></script>
+</head>
+<style>
+    div.search_movie_result_information_1 {
+        font-weight: 200;
+    }
+</style>
+<body>
+<header th:include="header :: copy"></header>
+<div class="all_content">
+    <aside th:include="aside :: aside"></aside>
+    <main>
+        <div class="search_movie_result" th:with="n=${top}">
+            <h2 class="search_movie_result_information_name_2">
+                <a th:href="'/top/movie/result/'+${n.getId()}" th:text="${n.getTitle()}">来自WSK的爱</a>
+            </h2>
+            <div class="top_movie_result_img">
+                <a th:href="'/top/movie/result/'+${n.getId()}">
+                    <img src="/static/image/1.jpg" th:src="${n.getImage()}" width="630" height="280" th:alt="${n.getTitle()}"/>
+                </a>
+            </div>
+            <span class="search_movie_result_information_name_1" th:text="${n.getDetail()}"></span>
+            <div class="">
+                &nbsp;
+            </div>
+        </div>
+        <div th:with="m=${movie}">
+            <div class="search_movie_result" th:each="o:${movie}">
+                <div class="search_movie_result_img">
+                    <a th:href="'/hot/movie/information/'+${o.getId()}">
+                        <img src="/static/image/1.jpg" th:src="${o.getImage()}" th:alt="${o.getTitle()}"/>
+                    </a>
+                </div>
+                <div class="search_movie_result_information">
+                    <div class="search_movie_result_information_1">
+                        <span class="search_movie_result_information_name_1">电影名</span>:
+                        <span class="search_movie_result_information_name_2">
+                            <a th:href="'/hot/movie/information/'+${o.getId()}" th:text="${o.getTitle()}">来自WSK的爱</a>
+                        </span>
+                    </div>
+                    <div class="search_movie_result_information_1">
+                        <!--                        <span class="search_movie_result_information_cast_1">导演</span>:-->
+                        <span class="search_movie_result_information_cast_2" th:text="${o.getDirector()}">
+                        </span>
+                    </div>
+                    <div class="search_movie_result_information_1">
+                        <!--                        <span class="search_movie_result_information_cast_1">编剧</span>:-->
+                        <span class="search_movie_result_information_cast_2" th:text="${o.getBianju()}">
+                        </span>
+                    </div>
+                    <div class="search_movie_result_information_1">
+                        <span class="search_movie_result_information_cast_1">时间和风格</span>:
+                        <span class="search_movie_result_information_cast_2" th:text="${o.getTAS()}">
+                        </span>
+                    </div>
+                    <div class="search_movie_result_information_1">
+                        <!--                        <span class="search_movie_result_information_cast_1">国家地区</span>:-->
+                        <span class="search_movie_result_information_cast_2" th:text="${o.getCountry()}">
+                        </span>
+                    </div>
+                    <div class="search_movie_result_information_1">
+                        <!--                        <span class="search_movie_result_information_cast_1">发行公司</span>:-->
+                        <span class="search_movie_result_information_cast_2" th:text="${o.getCompany()}">
+                        </span>
+                    </div>
+                    <div class="search_movie_result_information_1">
+                        <!--                        <span class="search_movie_result_information_cast_1">更多名片</span>:-->
+                        <span class="search_movie_result_information_cast_2" th:text="${o.getMore()}">
+                        </span>
+                    </div>
+                    <div class="search_movie_result_information_1">
+                        <span class="search_movie_result_information_name_1">详情</span>:
+                        <span class="search_movie_result_information_name_2" th:text="${o.getDetail()}">2020</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div style="clear: both"></div>
+</div>
+<footer>
+    <div>
+        <button class="go_to_top" value=""></button>
+    </div>
+</footer>
+</body>
+<script src="/js/all.js"></script>
+</html>

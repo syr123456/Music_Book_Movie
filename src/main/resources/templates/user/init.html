@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>网易云用户详情</title>
+    <link href="/image/title.ico" rel="icon"/>
+    <link rel="stylesheet" href="/css/aside.css"/>
+    <link href="/css/all.css" rel="stylesheet"/>
+    <link href="/css/movie/searchMovieResult.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.0.0.js"></script>
+    <script src="/js/aside/aside.js"></script>
+</head>
+<style>
+    h3 {text-align: center}
+</style>
+<body>
+<header th:include="header :: copy"></header>
+<div class="all_content">
+    <aside th:include="aside :: aside"></aside>
+    <main>
+<!--        <div class="all_search">-->
+<!--            <div class="my_friends_list">搜◎索</div>-->
+<!--            <div>-->
+<!--                <img class="search_user" title="搜索用户" src="/image/user.png"/>-->
+<!--                <form action="/search/user/result" method="post" id="searchMovie">-->
+<!--                    <input type="text" name="name" class="search" placeholder="搜索" id="search"/>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="my_friends_list">搜◎索</div>
+        <div>
+            <form action="/user/search/result" method="post" id="searchMovie">
+                <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <img src="/image/user_current.png" width="65" height="40" class="img_book"/>
+                <input type="text" name="name" class="search" placeholder="搜索" id="search"/>
+            </form>
+        </div>
+        <div class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <h3>热门用户</h3>
+        <table class="m-table m-table-rank" id="music_table">
+            <tbody th:with="i=0">
+            <tr th:each="o : ${entity}" class="even">
+                <td class="music_img" th:title="${o.getName()}">
+                    <a th:href="'/user/information/' + ${o.getId()} ">
+                        <a class="movie_font">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <img th:src="${o.getImg()}" width="40" height="40"  class="music_img"/>
+                    </a>
+                </td>
+                <td class="hd rank" th:title="${o.getName()}">&nbsp;
+                    <a th:href="'/user/information/' + ${o.getId()}">
+                        <span class="music_songname" th:text="${o.getName()}">用户</span></a>
+                </td>
+                <td class="hd music_singername" th:title="${o.getCity()}">
+                    <span class="music_songname" th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+${o.getCity()}">地区</span>
+                </td>
+                <td class="hd music_albumname" th:title="${o.getGedan()}">
+                    <span class="music_songname" th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;歌单：'+${o.getGedan()}">歌单</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+    <div style="clear: both"></div>
+</div>
+<footer>
+    <div>
+        <button class="go_to_top" value=""></button>
+    </div>
+</footer>
+</body>
+<script src="/static/js/all.js"></script>
+</html>

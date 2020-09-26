@@ -1,0 +1,29 @@
+/*
+ *图片中的一条椭圆半透明背景
+ *
+ * */
+#imgyuan{
+    width: 182px;
+    height: 20px;
+    border-radius: 12px;
+    background-color: red;
+    padding-left: 13px;
+    margin: 0 auto;
+    position: relative;
+    top: -40px;
+    background-color: rgba(1, 150, 0, 0.3);
+}
+/*
+ *每一个小圆点
+ * */
+#imgyuan font{
+    border:1px solid white;
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    margin-right: 9px;
+    margin-top: 4px;
+    display: block;
+    float: left;
+    background-color: white;
+}
