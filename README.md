@@ -1,3 +1,5 @@
+#我的blog（目前还在完善阶段）：
+https://blog.csdn.net/qq_42145057/article/details/108812578
 # Music_Book_Movie
 基于springboot的开发网站，可以访问书籍的查询和电影音乐的播放，运用技术包括：编程语言java，数据库mysql，缓存redis，maven，前端html，js，css以及一些爬虫技术（书籍来自读书网，音乐来自网易云，电影是在时光电影网站数据进行爬取）
 #运行环境
